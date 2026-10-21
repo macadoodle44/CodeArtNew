@@ -11,15 +11,21 @@ function setup() {
 function draw() {
   background(162, 220, 245);
 //making a grid background
-  stroke(152, 211, 237);
-  strokeWeight(4);
+  noStroke();
   //generating a row of circles
   for (let i = 0; i < cols; i++) {
       for (let j=0; j < rows; j++) {
 
     let x = i * gridSize + gridSize/2;
     let y = j * gridSize + gridSize/2;
-    circle(x, y, gridSize*0.8)
+    //mapping
+    let d = dist(x, y, mouseX, mouseY);
+
+    let circleSize = map(d, 0, 800, gridSize, gridSize*0.5);
+    let r = map(d, 0, width, 0, 200);
+    let b = map(d, 0, height, 20, 80);
+    fill(r, 150, b);
+    circle(x, y, circleSize);
   }
   }
 
