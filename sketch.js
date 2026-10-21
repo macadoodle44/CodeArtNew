@@ -1,6 +1,7 @@
 let gridSize = 50
 let cols
 let rows
+let isGlassesOn = false;
 
 function setup() {
   createCanvas(500, 500);
@@ -12,7 +13,7 @@ function draw() {
   background(162, 220, 245);
 //making a grid background
   noStroke();
-  //generating a row of circles
+  //generating a grid of circles
   for (let i = 0; i < cols; i++) {
       for (let j=0; j < rows; j++) {
 
@@ -21,14 +22,20 @@ function draw() {
     //mapping
     let d = dist(x, y, mouseX, mouseY);
 
-    let circleSize = map(d, 0, 800, gridSize, gridSize*0.5);
-    let r = map(d, 0, width, 0, 200);
-    let b = map(d, 0, height, 20, 80);
-    fill(r, 150, b);
+    let circleSize = map(d, 0, 500, gridSize, gridSize*0.5);
+    let r = map(d, 0, width, 10, 150);
+    let g = map(d, 0, height, 100, 250);
+    fill(r, g, 50);
     circle(x, y, circleSize);
   }
   }
 
+//background stars
+  // push();
+  // translate(width * 0.8, height * 0.5);
+  // rotate(frameCount / -100.0);
+  // star(0, 0, 30, 70, 5);
+  // pop();
 
   noStroke();
   //back of hair
@@ -62,6 +69,10 @@ function draw() {
   strokeWeight(5);
   noFill();
   arc(250, 325, 100, 50, 0, PI, OPEN);
+  //earrings
+  stroke(245, 194, 100);
+  line(100, 300, 100, 315);
+  line(400, 300, 400, 315);
   //glasses
   stroke(105, 74, 31);
   strokeWeight(8);
@@ -70,16 +81,15 @@ function draw() {
   rect(260, 215, 100, 75, 20, 10, 40, 40);
   strokeWeight(5);
   line(245, 245, 260, 245);
-  //earrings
-  stroke(245, 194, 100);
-  line(100, 300, 100, 315);
-  line(400, 300, 400, 315);
 
-  //interaction sunglasses
-  // function mouseClicked() {
-  // if (value === noFill) {
-  //   value = fill(0);
-  // } else {
-  //   value = noFill;
-  // }
+  if (isGlassesOn) {
+    fill(0, 0, 0, 100);
+    rect(140, 215, 100, 75, 10, 20, 40, 40);
+    rect(260, 215, 100, 75, 20, 10, 40, 40);
+  }
+  
+}
+
+function mouseClicked() {
+  isGlassesOn = !isGlassesOn;
 }
